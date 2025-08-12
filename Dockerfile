@@ -19,4 +19,15 @@ RUN addgroup --system --gid 1001 nodejs && \
 USER mcp
 
 # Run the MCP server in stdio mode
-CMD npx -y @twilio-alpha/mcp "$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"
+#CMD npx -y @twilio-alpha/mcp "$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"
+# Create entrypoint script
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'set -e' >> /app/entrypoint.sh && \
+    echo 'echo "Starting Twilio MCP with account: $TWILIO_ACCOUNT_SID"' >> /app/entrypoint.sh && \
+    echo 'exec npx -y @twilio-alpha/mcp "$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh && \
+    chown -R mcp:nodejs /app
+
+USER mcp
+
+ENTRYPOINT ["/app/entrypoint.sh"]
