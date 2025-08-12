@@ -19,4 +19,6 @@ RUN addgroup --system --gid 1001 nodejs && \
 USER mcp
 
 # Run the MCP server in stdio mode
-CMD npx -y @twilio-alpha/mcp "$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"
+#CMD npx -y @twilio-alpha/mcp "$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"
+# Run the MCP server in stdio mode
+ENTRYPOINT ["/bin/sh", "-c", "exec npx -y @twilio-alpha/mcp \"$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET\""]
