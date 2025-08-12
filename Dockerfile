@@ -16,8 +16,6 @@ RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 mcp && \
     chown -R mcp:nodejs /app
 
-USER mcp
-
 # Run the MCP server in stdio mode
 #CMD npx -y @twilio-alpha/mcp "$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"
 # Create entrypoint script
