@@ -33,6 +33,7 @@ RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
     echo 'CMD_ARGS="$TWILIO_ACCOUNT_SID/$TWILIO_API_KEY:$TWILIO_API_SECRET"' >> /app/entrypoint.sh && \
     echo 'if [ -n "$TWILIO_TAGS" ]; then' >> /app/entrypoint.sh && \
     echo '  CMD_ARGS="$CMD_ARGS --tags $TWILIO_TAGS"' >> /app/entrypoint.sh && \
+    echo 'fi' >> /app/entrypoint.sh && \
     echo 'if [ -n "$TWILIO_SERVICES" ]; then' >> /app/entrypoint.sh && \
     echo '  CMD_ARGS="$CMD_ARGS --services $TWILIO_SERVICES"' >> /app/entrypoint.sh && \
     echo 'fi' >> /app/entrypoint.sh && \
